@@ -69,8 +69,11 @@ def get_pie_chart(entered_site):
         return fig
     else:
         filtered_df = spacex_df[spacex_df['Launch Site'] == entered_site]
-        fig = px.pie(filtered_df, values='class',
-                     names='Mission Outcome',
+        result = filtered_df['Mission Outcome'].value_counts()
+        names=result.index
+        values=result.values
+        fig = px.pie(filtered_df, values=values,
+                     names=names,
                      title='Successful vs Unsuccessful launches by site')
         return fig
 
